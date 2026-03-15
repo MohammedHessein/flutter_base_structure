@@ -1,17 +1,93 @@
-# flutter_base_strucure
 
-A new Flutter project.
+# Project Title : Flutter Base
 
-## Getting Started
+# Project BackEnd : ASP or PHP
 
-This project is a starting point for a Flutter application.
+## Project Description : Flutter Base Description
 
-A few resources to get you started if this is your first Flutter project:
+**The main idea**
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+**Types of users**
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. USERS
+
+**FLUTTER_VERSION** : 3.38.9
+
+## Links for development :
+
+1. [postman collection](ADD_LINK_HERE)
+
+2. [UI](UI_LINK)
+
+3. [Test_file](TEST_FILE_LINK)
+
+## Dashboard :
+
+1. [Link](DASHBOARD_LINK)
+2. dashboard account :
+    - email : EMAIL
+    - password : PASS
+
+## Accounts for App :
+
+[USER]===>
+
+## Links for project :
+
+1. [App in app store]()
+2. [App in google play]()
+
+## App Bundle :
+
+-com.smartvision.cleansolution
+or
+
+- com.smartvision.flutter_base
+
+## FireBase :
+
+1. FIREBASE_ACCOUNT_HOLDER
+    - smartvision
+
+2. PROJECT_NAME_IN_FIREBASE
+    - Flutter_Base
+
+## Team members :
+
+1. **Flutter**
+
+    - DEVELOPER_NAME
+
+2. **Backend**
+
+    - DEVELOPER_NAME
+
+3. **Testing**
+
+    - DEVELOPER_NAME
+
+## Image :
+
+![Logo](assets/svg/app_svg/app_logo.png)
+
+## Localization Generator:
+
+### Run this Command to generate localization files
+
+```bash
+dart run generate/strings/main.dart
+```
+
+## Assets Generator:
+
+### Run this command to activate assets generator
+
+```bash
+dart pub global activate flutter_gen
+```
+
+### Run this Command to generate app icons
+
+```bash
+dart run build_runner build
+```
