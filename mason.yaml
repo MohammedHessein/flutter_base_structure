@@ -1,3 +1,5 @@
 bricks:
   flutter_clean_base:
     path: "..\\flutter_base\\bricks\\flutter_clean_base"
+  feature:
+    path: bricks/feature

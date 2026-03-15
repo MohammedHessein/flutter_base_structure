@@ -1,0 +1,11 @@
+name: feature
+description: A custom Mason brick for scaffolding features in this project.
+version: 0.1.0+1
+environment:
+  mason: ">=0.1.0-dev.50 <0.11.0"
+vars:
+  name:
+    type: string
+    description: The name of the feature (snake_case).
+    default: my_feature
+    prompt: What is the name of the feature?

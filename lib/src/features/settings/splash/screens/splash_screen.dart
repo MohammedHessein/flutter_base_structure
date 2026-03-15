@@ -5,11 +5,8 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => injector<BaseUrlCubit>()),
-        BlocProvider(create: (context) => injector<SplashCubit>()),
-      ],
+    return BlocProvider(
+      create: (context) => injector<SplashCubit>(),
       child: _SplashView(),
     );
   }

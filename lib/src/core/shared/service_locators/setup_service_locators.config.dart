@@ -35,7 +35,6 @@ import '../../base_crud/code/presentation/cubit/get_base_name_and_id/get_base_na
     as _i30;
 import '../../network/dio_service.dart' as _i37;
 import '../../network/network_service.dart' as _i632;
-import '../cubits/base_url/base_url_cubit.dart' as _i200;
 import '../cubits/user_cubit/user_cubit.dart' as _i996;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -46,9 +45,8 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factory<_i30.GetBaseEntityCubit<dynamic>>(
-      () => _i30.GetBaseEntityCubit(),
+      () => _i30.GetBaseEntityCubit<dynamic>(),
     );
-    gh.factory<_i200.BaseUrlCubit>(() => _i200.BaseUrlCubit());
     gh.factory<_i869.LogOutCubit>(() => _i869.LogOutCubit());
     gh.factory<_i319.AddComplainCubit>(() => _i319.AddComplainCubit());
     gh.factory<_i319.ComplainsDetailsCubit>(

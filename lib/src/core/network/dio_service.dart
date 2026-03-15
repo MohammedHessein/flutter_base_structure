@@ -11,6 +11,7 @@ import '../error/exceptions.dart';
 import '../helpers/cache_service.dart';
 import '../navigation/navigator.dart';
 import '../shared/models/base_model.dart';
+import 'api_endpoints.dart';
 import 'backend_configuation.dart';
 import 'configuration_interceptor.dart';
 import 'extensions.dart';
@@ -59,7 +60,8 @@ class DioService implements NetworkService {
   @override
   Future<void> updateBaseUrl() async {
     final baseUrl = await getBaseUrl();
-    _dio.options.baseUrl = baseUrl;
+    _dio.options.baseUrl =
+        baseUrl.isNotEmpty ? baseUrl : ApiConstants.baseUrl;
   }
 
   @override

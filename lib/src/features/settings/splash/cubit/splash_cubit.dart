@@ -5,14 +5,10 @@ class SplashCubit extends Cubit<SplashState> {
   SplashCubit() : super(SplashState.initial());
 
   void initApp(BuildContext context) async {
-    final baseUrlCubit = context.read<BaseUrlCubit>();
-    final result = await baseUrlCubit.fetchBaseUrl();
-    if (result) {
-      // Inject BaseUrl To Dio Service after Fetching it form FireBase DataBase
-      await injector<NetworkService>().updateBaseUrl();
-      if (!context.mounted) return;
-      await initUserData(context);
-    }
+    // Inject BaseUrl To Dio Service
+    await injector<NetworkService>().updateBaseUrl();
+    if (!context.mounted) return;
+    await initUserData(context);
   }
 }
 

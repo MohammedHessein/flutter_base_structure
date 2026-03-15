@@ -1,4 +1,5 @@
 class ApiConstants {
+  static const String baseUrl = 'https://your-api-url.com/api/';
   // ---------------------- Settings -----------------------------------
   static const String intro = 'get-intros';
   static const String countries = 'countries';
