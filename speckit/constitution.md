@@ -1,34 +1,32 @@
 # 🏛️ Hattrick App – Project Constitution
 # The immutable laws of this codebase.
 
-## 1. Architecture Law: Clean Structure (lib/src)
+## 1. Architecture Law: Separation of Concerns
 - All source code MUST live under `lib/src`.
-- `lib/src/core/` → Global shared infrastructure.
-- `lib/src/features/` → Feature-specific modules, organized by type (`logic/`, `settings/`).
-- Feature folder structure: `entity/` (params/models) and `presentation/` (view/widgets/cubits).
+- Use `lib/src/core/` for global shared infrastructure.
+- Use `lib/src/features/` for feature-specific modules.
+- Features MUST be organized by type (e.g., `logic/`, `settings/`).
 
 ## 2. State Management Law: AsyncCubit Standard
-- **Primary**: All feature Cubits MUST extend `AsyncCubit<T>` from core.
-- **Workflow**: Use `executeAsync()` within Cubit methods to handle loading/error states automatically.
-- **Data Fetching**: Use `baseCrudUseCase.call(CrudBaseParams(...))` for all standard API operations.
+- All feature-level state management MUST extend `AsyncCubit<T>` or `PaginatedCubit<T>`.
+- Use `executeAsync()` to handle loading, data, and error states automatically.
+- Use `BaseStatus.when()` for exhaustive state handling in the UI layer.
+- State updates for CRUD operations should be done locally where possible.
 
-## 3. Navigation Law: The "Go" Utility
-- **Standard**: Always use the `Go` class for navigation.
-- **Methods**: Prefer `Go.toNamed()` with `NamedRoutes` for navigation across features.
+## 3. Navigation Law: Go Utility Only
+- Always use the `Go` class for navigation (e.g., `Go.to(context, Screen())`).
+- Do not use `Navigator.push` directly.
 
-## 4. Network Law: DioService + BaseModel
-- **Service**: API calls are executed via `DioService` (NetworkService).
-- **Data Mapping**: All responses MUST be wrapped in `BaseModel<T>`.
-- **Params**: Use `CrudBaseParams` to define API path, method, and mapper.
+## 4. UI Law: Component Reuse & Styling
+- Always check `lib/src/core/widgets/` for reusable components before building new ones.
+- Access sizes and colors via `AppSizes` and `ColorManager`.
+- Use `IconWidget` and `CachedImage` for all icon and image needs.
 
 ## 5. Dependency Injection Law: Injectable
-- **Standard**: Use `@injectable` for Cubits and `@LazySingleton` for core services.
-- **Generation**: Run `flutter pub run build_runner build` after adding new injectable components.
+- Register all Cubits using `@injectable`.
+- Register core services using `@LazySingleton`.
+- Always run `build_runner` after adding/modifying injectable components.
 
-## 6. UI Law: Component Reuse
-- **Shared Widgets**: Check `lib/src/core/widgets/` before creating new generic components.
-- **Styling**: Access sizes consistently via `AppSizes` and colors via `ColorManager`.
-
-## 7. Localization Law
-- **Framework**: `easy_localization`.
-- **Keys**: Use generated `LocaleKeys` for all strings. Never hardcode user-facing text.
+## 6. Localization Law: Zero Hardcoding
+- Use `easy_localization` and generated `LocaleKeys` for all user-facing strings.
+- Arabic is the primary locale; ensure RTL compatibility (use `start`/`end`).

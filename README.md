@@ -1,93 +1,75 @@
 
-# Project Title : Flutter Base
+# 🚀 Flutter Base Structure
 
-# Project BackEnd : ASP or PHP
+A robust, scalable, and feature-rich Flutter starter template built with **Clean Architecture** and **BLoC/Cubit**. Designed for high productivity and maintainable codebases.
 
-## Project Description : Flutter Base Description
+---
 
-**The main idea**
+## 🏗️ Architecture Overview
 
-**Types of users**
+This project follows **Clean Architecture** principles, ensuring that business logic is isolated from UI and data concerns.
 
-1. USERS
+- **Presentation Layer**: UI Widgets, Screens, and BLoCs/Cubits.
+- **Domain Layer**: Business logic, use cases, and repository interfaces.
+- **Data Layer**: Repository implementations, data sources (Remote/Local), and DTOs.
 
-**FLUTTER_VERSION** : 3.38.9
+For detailed coding standards, see the [Coding Rules](.agents/skills/project_efficiency/rules.md).
 
-## Links for development :
+---
 
-1. [postman collection](ADD_LINK_HERE)
+## 🛠️ Tech Stack & Key Features
 
-2. [UI](UI_LINK)
+- **State Management**: [BLoC/Cubit](https://pub.dev/packages/flutter_bloc) (with `AsyncCubit` & `PaginatedCubit` extensions).
+- **Dependency Injection**: [GetIt](https://pub.dev/packages/get_it) + [Injectable](https://pub.dev/packages/injectable).
+- **Navigation**: Custom `Go` utility for simplified routing.
+- **Networking**: [Dio](https://pub.dev/packages/dio) with a centralized `DioService`.
+- **UI Components**: Custom `IconWidget`, `CachedImage`, and shared core widgets.
+- **RTL Support**: Built with Arabic-first (RTL) support in mind.
+- **Code Generation**: [build_runner](https://pub.dev/packages/build_runner) for DI, JSON serialization, and more.
+- **Scaffolding**: [Mason](https://pub.dev/packages/mason) for rapid feature development.
 
-3. [Test_file](TEST_FILE_LINK)
+---
 
-## Dashboard :
+## 🚀 Getting Started
 
-1. [Link](DASHBOARD_LINK)
-2. dashboard account :
-    - email : EMAIL
-    - password : PASS
+### 1. Prerequisites
+- Flutter SDK (Recommended: v3.x or latest stable)
+- [Mason CLI](https://pub.dev/packages/mason_cli) installed globally.
 
-## Accounts for App :
-
-[USER]===>
-
-## Links for project :
-
-1. [App in app store]()
-2. [App in google play]()
-
-## App Bundle :
-
--com.smartvision.cleansolution
-or
-
-- com.smartvision.flutter_base
-
-## FireBase :
-
-1. FIREBASE_ACCOUNT_HOLDER
-    - smartvision
-
-2. PROJECT_NAME_IN_FIREBASE
-    - Flutter_Base
-
-## Team members :
-
-1. **Flutter**
-
-    - DEVELOPER_NAME
-
-2. **Backend**
-
-    - DEVELOPER_NAME
-
-3. **Testing**
-
-    - DEVELOPER_NAME
-
-## Image :
-
-![Logo](assets/svg/app_svg/app_logo.png)
-
-## Localization Generator:
-
-### Run this Command to generate localization files
-
+### 2. Installation
 ```bash
-dart run generate/strings/main.dart
+flutter pub get
+mason get
 ```
 
-## Assets Generator:
-
-### Run this command to activate assets generator
-
+### 3. Running the App
 ```bash
-dart pub global activate flutter_gen
+flutter run
 ```
 
-### Run this Command to generate app icons
+---
 
-```bash
-dart run build_runner build
-```
+## 📝 Essential Commands
+
+| Action | Command |
+| :--- | :--- |
+| **Install dependencies** | `flutter pub get` |
+| **Generate code** | `dart run build_runner build --delete-conflicting-outputs` |
+| **Generate localization** | `dart run generate/strings/main.dart` |
+| **Scaffold new feature** | `mason make feature --name <feature_name>` |
+
+---
+
+## 📁 Documentation
+
+- [Coding Rules & Standards](.agents/skills/project_efficiency/rules.md)
+- [Mason Scaffolding Guide](MASON_GUIDE.md)
+- [Spec Kit (Project Design & Decisions)](speckit/spec.md)
+
+---
+
+## 🤝 Project Metadata
+
+- **Bundle ID**: `com.smartvision.flutter_base` or `com.smartvision.cleansolution`
+- **Firebase Project**: `Flutter_Base`
+- **Backend Type**: ASP / PHP

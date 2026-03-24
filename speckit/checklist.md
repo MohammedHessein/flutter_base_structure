@@ -1,42 +1,28 @@
 # ✅ Hattrick App – Development Checklist
-# Use this checklist for every feature addition or modification.
 
----
+### 1. Structure & Scaffolding
+- [ ] Module created in `lib/src/features/[type]/[feature_name]/`.
+- [ ] Cubit extends `AsyncCubit<T>` or `PaginatedCubit<T>`.
+- [ ] Feature imports consolidated in `presentation/imports/view_imports.dart`.
 
-## 🆕 New Feature Checklist
+### 2. Logic & Data
+- [ ] Cubit uses `@injectable`.
+- [ ] API calls triggered via `executeAsync()`.
+- [ ] `baseCrudUseCase.call()` used with correct `CrudBaseParams`.
+- [ ] Data mapper correctly transforms JSON to entity.
 
-### 1. Structure
-- [ ] Created module in `lib/src/features/[type]/[feature_name]/`
-- [ ] Created `entity/[name]_params.dart` if needed.
-- [ ] Created `presentation/view/[name]_screen.dart`
-- [ ] Created `presentation/cubits/[name]_cubit.dart` (injectable)
-- [ ] Created `presentation/widgets/` for feature UI.
+### 3. UI & Styling
+- [ ] Navigation uses `Go` utility.
+- [ ] Icons use `IconWidget`.
+- [ ] Network images use `CachedImage`.
+- [ ] Colors and sizes accessed via `ColorManager` and `AppSizes`.
+- [ ] RTL compatibility verified (start/end used).
 
-### 2. Registration & Routing
-- [ ] Registered Cubit with `@injectable`.
-- [ ] Added route to `NamedRoutes` enum.
-- [ ] Verified route string matches requirements.
+### 4. Localization
+- [ ] Strings added to translation JSON files.
+- [ ] `LocaleKeys` regenerated.
 
-### 3. Data & Logic
-- [ ] Cubit extends `AsyncCubit<T>`.
-- [ ] API calls implemented using `executeAsync`.
-- [ ] Operation calls `baseCrudUseCase.call(CrudBaseParams(...))`.
-- [ ] Mapper correctly transforms JSON into the entity/model.
-
-### 4. UI Layer
-- [ ] Screen uses `Go` class for navigation.
-- [ ] Resources accessed via `ColorManager`, `AppSizes`, `ConstantManager`.
-- [ ] Loading state handled (AsyncCubit provides status).
-
-### 5. Localization
-- [ ] Strings added to AR/EN JSON files.
-- [ ] Re-generated `LocaleKeys`.
-
----
-
-## 🧪 Pre-PR Checklist
-
+### 5. Final Polish
 - [ ] `flutter analyze` passes.
-- [ ] No `print()` statements.
-- [ ] Unused imports removed.
-- [ ] Verified both AR and EN locales.
+- [ ] No hardcoded strings or print statements.
+- [ ] Code formatted with `dart format`.

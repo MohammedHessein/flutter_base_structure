@@ -8,6 +8,7 @@ description: Guide for working efficiently with the Clean Architecture + BLoC/Cu
 This skill helps you work effectively with the `flutter_base_structure` project architecture.
 
 ## Architecture Patterns
+- **Full Rules**: See [rules.md](rules.md) for detailed coding standards.
 - **Standard**: Clean Architecture + BLoC/Cubit.
 - **Layers**: `presentation`, `domain`, `data`.
 - **DI**: GetIt + Injectable. Use `injector<T>()`.
