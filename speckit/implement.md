@@ -1,4 +1,4 @@
-# 🚀 Hattrick App – Implementation Workflows
+# 🚀 Implementation Workflows
 
 ## Workflow 1: Create a New Feature
 
