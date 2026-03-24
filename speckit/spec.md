@@ -1,48 +1,65 @@
-# 📋 Project Specification - Flutter Base Structure (Hattrick)
+# 📋 Project Specification - Flutter_Base
 
-This document defines what the project is, its core capabilities, and the technical foundation it rests upon.
+This document serves as the authoritative "Source of Truth" for the `Flutter_Base` project, defining its identity, technical foundation, and core architectural pillars.
 
-## Project Identity
-- **Name**: my_new_app (Flutter Base Structure)
-- **Type**: Professional Modular Flutter Baseline.
-- **Framework**: Flutter (v3.x)
-- **Primary Locale**: Arabic (RTL-first)
-- **Typography**: Expo Arabic (Light to Bold weights)
-
----
-
-## Core Architecture
-
-The project follows a **Modified Clean Architecture** with a focus on ease of use via **AsyncCubit** and **Base CRUD** utilities.
-
-### `lib/src/` Directory Map
-| Module | Path | Description |
-| :--- | :--- | :--- |
-| **Config** | `src/config/` | Design tokens, themes, and localization setup. |
-| **Core** | `src/core/` | Global infrastructure (Networking, Navigation, DI). |
-| **Features** | `src/features/` | Feature-specific logic and UI, split by type. |
+## 🏛️ Project Identity
+- **Name**: Flutter_Base
+- **Core Vision**: A premium, high-performance modular baseline for scalable Flutter applications.
+- **Primary Locale**: Arabic (RTL-first) with full secondary English support.
+- **Target OS**: Android, iOS, Windows.
+- **Typography**: Expo (Light, Book, Medium, SemiBold, Bold).
 
 ---
 
-## Technical Standards
+## 🛠️ Tech Stack (100% Verified)
 
-### State Management: BLoC / Cubit
-- **Standard**: Features use `AsyncCubit<T>` for individual data objects or `PaginatedCubit<T>` for lists.
-- **Helpers**: `BlocStatelessWidget` and `BlocStatefulWidget` simplify `BlocProvider` and `AsyncCubit` creation.
-- **Automation**: Use `executeAsync()` to automatically handle loading, data, and error states.
-- **UI Handling**: `BaseStatus.when()` extension provides an exhaustive way to handle all async states in the UI.
+### Core Framework
+- **Flutter SDK**: `^3.8.0`
+- **Language**: Dart
 
-### Networking: Base CRUD & Dio
-- **Client**: [Dio](https://pub.dev/packages/dio) with `DioService`.
-- **Logic**: Centralized `baseCrudUseCase` for standard API operations (GET, POST, etc.).
-- **Models**: All responses are mapped to `BaseModel<T>`.
+### State Management & Persistence
+- **State Logic**: `flutter_bloc` (v9.1.1) - Cubit-weighted architecture.
+- **Status-Handling**: `AsyncCubit<T>` and `PaginatedCubit<T>` base classes.
+- **Persistence**: `hydrated_bloc` (v10.1.1) for reactive state caching.
 
-### Navigation: Go Utility
-- **Standard**: All routing is handled by the `Go` utility class for consistency and simpler Context handling.
+### Dependency Injection & Modularization
+- **Locator**: `get_it` (v8.0.3).
+- **Generation**: `injectable` (v2.5.1) with automated discovery.
+- **Scaffolding**: `Mason` for feature-first generation.
+
+### Networking & Data Handling
+- **Client**: `dio` (v5.7.0).
+- **Functional Logic**: `multiple_result` (v5.1.0) for predictive error handling (`Result<T, Failure>`).
+- **Interceptors**: `UnAuthenticatedInterceptor` (Session/Block management).
+
+### Storage & Caching
+- **Sensitive Data**: `flutter_secure_storage` (v9.2.2) for encrypted tokens.
+- **Global Config**: `shared_preferences` (v2.2.3) for simple key-value pairs.
+
+### UI/UX & Localization
+- **Localization**: `easy_localization` (v3.0.7) with RTL-first priority.
+- **Scaling**: `flutter_screenutil` (v5.9.3) for pixel-perfect responsiveness.
+- **Interactions**: `skeletonizer`, `flutter_animate`, `lottie`.
+- **Media**: `video_player`, `flutter_svg`, `cached_network_image`.
 
 ---
 
-## UI Documentation
-- **Styling**: `ColorManager` for colors, `AppSizes` for padding/font-sizes.
-- **Icons/Images**: `IconWidget` (supports IconData, SVG, Network, Lottie, Assets) and `CachedImage`.
-- **Micro-interactions**: [Skeletonizer](https://pub.dev/packages/skeletonizer) for loading states and custom transitions via `Go`.
+## 🏗️ Architectural Foundations
+
+### 1. Feature-First Structure
+The project lives in `lib/src/`, split into three high-level domains:
+- **`config/`**: Styling tokens, Material 3 themes, and localization assets.
+- **`core/`**: Shared infrastructure:
+  - `network/`: Dio service, interceptors, and Base CRUD.
+  - `navigation/`: Centralized `Go` utility and transition builders.
+  - `shared/`: App-wide `UserModel`, `UserCubit`, and DI locators.
+  - `widgets/`: Base library (`AppTextField`, `UniversalMediaWidget`).
+- **`features/`**: Modular, self-contained business logic (Logic/Settings pattern).
+
+### 2. Networking Resilience
+- **Base CRUD**: All standard API operations are piped through a generic `BaseCrudUseCase`.
+- **Error Mapping**: Automated mapping of HTTP codes (PHP/ASP) to domain `Failure` objects.
+
+### 3. Session & Security
+- **Global Access**: Auth state is managed by a lazy-singleton `UserCubit`.
+- **Session Protection**: `UnAuthenticatedInterceptor` automatically triggers a global UI bottomsheet on 401/Blocked responses.
