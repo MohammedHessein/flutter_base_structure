@@ -15,6 +15,8 @@ We follow a strict separation of concerns across three main layers:
     - Contains business logic, use cases, and repository interfaces.
 - **Data Layer (`lib/src/features/{feature}/data/`)**:
     - Contains repository implementations, data sources (Remote/Local), and DTOs.
+- **Shared Layer (`lib/src/core/shared/`)**:
+    - Contains app-wide models (`BaseModel`), global cubits (`UserCubit`), and `AppBlocObserver` for centralized logging.
 
 ## 🚦 State Management (BLoC/Cubit)
 
@@ -31,21 +33,61 @@ We follow a strict separation of concerns across three main layers:
 ## 🌐 Networking
 
 - We use **Dio** with a centralized `DioService`.
+- **Response Format**: All API responses are wrapped in `BaseModel<T>`, which provides `message`, `key`, and `data`.
+- **Interceptors**:
+    - `ConfigurationInterceptor`: Maps backend-specific keys (PHP/ASP) to standard HTTP status codes.
+    - `UnAuthenticatedInterceptor`: Listens for 401s or "unauthenticated/blocked" keys to trigger the global `UnAuthenticatedBottomSheet`.
 - All API constants must be placed in `ApiConstants`.
-- Response handling should be done via `Either<Failure, T>` (using the Dartz package).
 
 ## 🗺️ Navigation
 
 - Use the centralized `Go` utility for all navigation.
+- **Routing**: Static routes are defined in `NamedRoutes` and built via `PageRouterBuilder`.
+- **Transitions**: Comprehensive support for `fade`, `rotation`, `scale`, `shake`, `size`, `slide`, and platform-default `cupertino`.
 - Methods: `Go.to(context, Screen())`, `Go.back(context)`.
 
-## 🎨 UI & Styling
+## 🛠️ Core Utilities & Extensions
 
-- **RTL First**: The app is Arabic-first. Use `padding.start`, `padding.end`, `Alignment.centerLeft/Right`, etc., instead of absolute `left/right`.
-- **Icons**: Use the custom `IconWidget`. It supports `IconData`, SVG paths, URLs (via `CachedImage`), Lottie JSON, and asset paths.
-- **Images**: Use `CachedImage` for all network-based images.
-- **Resources**: Use `AppPadding`, `AppColors`, and `AppFontSize` from `lib/src/core/config/res/`.
-- **Typography**: The primary font family is **Expo**.
+### UI Extensions (`lib/src/core/extensions/`)
+- **Widget**: Chainable `.paddingAll()`, `.marginSymmetric()`, `.visibility()`, `.center`.
+- **TextStyle**: Chainable `.bold`, `.s16`, `.setPrimaryColor`, `.underline`.
+- **BuildContext**: `.width`, `.height`, `.isArabic`, `.hideKeyboard()`, `.isKeyboardOpen`.
+- **String**: `.capitalize()`, `.toEnglishNumbers()`, `.toCurrency()`, `.tr()` (via `.locale`).
+- **DateTime**: `.toFullDate()`, `.toTime()`, `.toDayMonthYear()`.
+
+### Global Helpers (`lib/src/core/helpers/`)
+- **ImageHelper**: Unified API for Picking (Gallery/Camera), Multi-picking, and Cropping.
+- **LauncherHelper**: Native deep links for social media (WhatsApp, TikTok, etc.) and system actions (Call, Mail, URLs).
+- **CacheStorage**: Standard `SharedPreferences` wrapper for simple data and JSON Maps.
+- **SecureStorage**: `FlutterSecureStorage` for tokens and sensitive info.
+- **Validators**: Secure field validation (includes script-injection protection).
+- **LoadingManager**: `FullScreenLoadingManager` for global blocking overlays.
+
+### Specialized UI Widgets (`lib/src/core/widgets/`)
+- **Image Widgets**: `CachedImage` (networking), `CustomAvatar`, `CustomImageSlider`, `UploadImage` (with picker logic), `ImageView`.
+- **Media**: `UniversalMediaWidget` (controller-based handling of SVG, Video, and Network/Asset images).
+- **Tools**: `PaginatedListWidget` (for infinite scrolling) and `AsyncBlocBuilder` (for reactive UI).
+- **Notifications**: `NotificationService` handles FCM tokens, local notification display, and automatic routing via `NotificationNavigator` and `NotificationRoutes`.
+
+## 🏛️ Project Structure (`lib/src/`)
+- **`config/`**: Global configuration (`themes`, `language`, `res`).
+- **`core/`**: Shared foundational logic.
+  - `base_crud/`: Generic Clean Architecture CRUD framework.
+  - `error/`: Custom exceptions (`Forbidden`, `Blocked`) and failures.
+  - `shared/`: `UserModel`, `UserCubit` (Session Management), and DI setup.
+  - `widgets/`: Rich base library (`AppTextField`, `DefaultScaffold`, `LoadingButton`).
+  - `network/`: Dio-based `NetworkService` with `UnAuthenticatedInterceptor`.
+- **`features/`**: App-specific business modules.
+
+## ⚠️ Error Handling & Resilience
+- **Exceptions**: Comprehensive HTTP status mapping in `exceptions.dart`.
+- **Failures**: Domain-level `Failure` objects for predictable propagation.
+- **Handling Views**: UI states for `Offline`, `Error`, and `Empty` data.
+
+## 🎨 UI & Styling
+- **RTL First**: Arabic-first design. Use `start`/`end` instead of `left`/`right`.
+- **Responsive UI**: Always use `ScreenUtil` (.h, .w, .sp, .r).
+- **Theming**: Access via `context.theme` and `context.textStyle` extensions.
 
 ## 🛠️ Helpers & Utilities
 

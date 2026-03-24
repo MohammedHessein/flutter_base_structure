@@ -16,6 +16,8 @@ This plan outlines the strategic direction for the project's development and inf
 - [ ] Performance audit for complex lists and transitions.
 - [ ] Implement CI/CD pipelines for automated builds.
 - [ ] Multi-flavor support (Development, Staging, Production).
+- [ ] Extend `BackendConfiguation` for automated endpoint toggling between ASP and PHP.
+- [ ] Advanced routing rules in `PageRouterBuilder` for nested navigation.
 
 ---
 
