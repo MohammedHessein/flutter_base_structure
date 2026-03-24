@@ -45,6 +45,12 @@ We follow a strict separation of concerns across three main layers:
 - **Icons**: Use the custom `IconWidget`. It supports `IconData`, SVG paths, URLs (via `CachedImage`), Lottie JSON, and asset paths.
 - **Images**: Use `CachedImage` for all network-based images.
 - **Resources**: Use `AppPadding`, `AppColors`, and `AppFontSize` from `lib/src/core/config/res/`.
+- **Typography**: The primary font family is **Expo**.
+
+## 🛠️ Helpers & Utilities
+
+- **Global Loading**: Use `FullScreenLoadingManager.show()` and `FullScreenLoadingManager.hide()` for blocking overlays.
+- **General Helpers**: The `Helpers` class provides utilities for FCM tokens, status bar colors, sharing, and language-based string selection (`showByLang`).
 
 ## 🛠️ Essential Commands
 

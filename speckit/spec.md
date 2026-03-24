@@ -3,11 +3,11 @@
 This document defines what the project is, its core capabilities, and the technical foundation it rests upon.
 
 ## Project Identity
-- **Name**: Flutter Base Structure (Hattrick)
-- **Type**: A modular, scalable baseline for Flutter applications.
+- **Name**: my_new_app (Flutter Base Structure)
+- **Type**: Professional Modular Flutter Baseline.
 - **Framework**: Flutter (v3.x)
-- **Status**: Active / Template
 - **Primary Locale**: Arabic (RTL-first)
+- **Typography**: Expo Arabic (Light to Bold weights)
 
 ---
 
