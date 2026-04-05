@@ -110,3 +110,40 @@ Every new feature must follow this structure inside `lib/src/features/{name}/`:
     - `cubits/`: State management.
     - `view/`: Screens/Pages.
     - `widgets/`: Local feature-specific widgets.
+
+## 🚫 Forbidden practices (Guide-aligned, this repo)
+
+Same intent as the [Flutter AI Prompt Guide — Forbidden Practices](https://ahmedslman.github.io/Flutter-Guide-To-Use-AI/#forbidden), mapped to **this** stack (`lib/src/`, Injectable, `AsyncCubit`, `NetworkService`, `Go`).
+
+### Presentation split (View → Bridge → Leaf)
+
+The guide uses View / Section / Widget. Here:
+
+- **View** = `presentation/view/` (and screens): thin composition, `BlocProvider` / `BlocStatelessWidget`, **NO styling or logic**, avoid heavy `BlocBuilder` here when a bridge widget is clearer.
+- **Bridge** = `presentation/widgets/` coordinators (e.g. `*_body.dart`): `context.read<Cubit>()`, `BlocBuilder` / `BlocSelector` / listeners, map state to child props — **Structural layout only** (Row/Column/Padding/ListView); **NO styling/decoration/colors**.
+- **Leaf** = small `presentation/widgets/`: `const` where possible, parameters only, theme/`AppColors`/ScreenUtil — **the ONLY place allowed to have styling**; **NO** `context.read<Cubit>()`, no repositories/use cases.
+
+### Do not
+
+- Put **business rules, styling, or thick state UI** in view files; use bridge widgets.
+- Put **styling, decoration, colors, or text styles** inside bridge (Section) widgets; delegate to Leaf widgets.
+- Use **`context.read` / Cubit** inside leaf widgets meant as pure UI.
+- **Hardcode** hex colors or user-facing **strings** (use `config/res/` + localization).
+- Create **`Dio()`** ad hoc or **hardcode base URLs** in features (use `NetworkService`, `ApiConstants`).
+- Scatter **`Navigator.push`**; use **`Go`** / **`NamedRoutes`** unless the file already follows a different legacy pattern.
+- Use **`BlocBuilder`** without **`buildWhen`** when the subtree is large or expensive.
+- Use **`ListView(children: ...)`** for long/dynamic lists — use **`ListView.builder`** or project pagination widgets.
+- Use **`Opacity`** for simple alpha — prefer **`Color.withOpacity` / `withValues`**.
+- Use **`print()`** — prefer **`AppBlocObserver`** / proper logging.
+- Let files grow **well past ~200 lines** without splitting responsibilities.
+
+### Cubit & data
+
+- Prefer **`AsyncCubit.executeAsync`** with use cases returning **`Result<T, Failure>`** instead of ad-hoc `try/catch` in every method.
+- **HTTP** belongs in **data sources** via the shared network layer — not in domain or presentation. Repository **implementations** call data sources only.
+
+### Where this is enforced for the AI
+
+- Root **`AGENTS.md`** — primary instruction set for **Antigravity** (workspace) and other tools that load it; same rules as the Flutter AI Prompt Guide adaptation.
+- **`.cursorrules`** — points Cursor users to `AGENTS.md` (optional).
+- **`.agent/workflows/`** — step-by-step: `create-feature.md`, `debug-issue.md`, `modify-feature.md`.

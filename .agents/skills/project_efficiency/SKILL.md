@@ -9,6 +9,7 @@ This skill helps you work effectively with the `flutter_base_structure` project 
 
 ## Architecture Patterns
 - **Full Rules**: See [rules.md](rules.md) for detailed coding standards.
+- **AI agent constraints (Antigravity)**: Root **`AGENTS.md`** holds the [Flutter AI Prompt Guide](https://ahmedslman.github.io/Flutter-Guide-To-Use-AI/)-aligned forbidden list and presentation split, adapted to `lib/src/features/` (Injectable, `AsyncCubit`, `NetworkService`, `Go`). Optional SOPs: `.agent/workflows/`. Cursor users: see `.cursorrules` → `AGENTS.md`.
 - **Standard**: Clean Architecture + BLoC/Cubit.
 - **Layers**: `presentation`, `domain`, `data`.
 - **DI**: GetIt + Injectable. Use `injector<T>()`.
